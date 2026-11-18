@@ -14,13 +14,42 @@
       background-color: #f0f4f8;
       font-family: Arial, sans-serif;
     }
+    .wadah {
+      text-align: center;
+    }
     h1 {
       color: #2c7a7b;
       font-size: 3rem;
+      margin: 0 0 16px;
+    }
+    #jam {
+      font-family: "Courier New", monospace;
+      font-size: 2.5rem;
+      color: #f0f4f8;
+      background-color: #2d3748;
+      padding: 12px 24px;
+      border-radius: 12px;
+      letter-spacing: 4px;
     }
   </style>
 </head>
 <body>
-  <h1>hello faw</h1>
+  <div class="wadah">
+    <h1>hello faw</h1>
+    <div id="jam">00:00:00</div>
+  </div>
+
+  <script>
+    function perbaruiJam() {
+      const sekarang = new Date();
+      const jam = String(sekarang.getHours()).padStart(2, "0");
+      const menit = String(sekarang.getMinutes()).padStart(2, "0");
+      const detik = String(sekarang.getSeconds()).padStart(2, "0");
+      document.getElementById("jam").textContent = jam + ":" + menit + ":" + detik;
+    }
+
+    perbaruiJam();
+    setInterval(perbaruiJam, 1000);
+  </script>
 </body>
 </html>
