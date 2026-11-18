@@ -31,21 +31,52 @@
       border-radius: 12px;
       letter-spacing: 4px;
     }
+    #tanggal {
+      margin-top: 14px;
+      font-size: 1.3rem;
+      color: #4a5568;
+    }
+    #ucapan {
+      margin-top: 8px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c7a7b;
+    }
   </style>
 </head>
 <body>
   <div class="wadah">
     <h1>hello faw</h1>
     <div id="jam">00:00:00</div>
+    <div id="tanggal"></div>
+    <div id="ucapan"></div>
   </div>
 
   <script>
+    const namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                       "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+    function ucapanSesuaiJam(jam) {
+      if (jam >= 4 && jam < 11) return "Selamat Pagi";
+      if (jam >= 11 && jam < 15) return "Selamat Siang";
+      if (jam >= 15 && jam < 18) return "Selamat Sore";
+      return "Selamat Malam";
+    }
+
     function perbaruiJam() {
       const sekarang = new Date();
       const jam = String(sekarang.getHours()).padStart(2, "0");
       const menit = String(sekarang.getMinutes()).padStart(2, "0");
       const detik = String(sekarang.getSeconds()).padStart(2, "0");
       document.getElementById("jam").textContent = jam + ":" + menit + ":" + detik;
+
+      const hari = namaHari[sekarang.getDay()];
+      const bulan = namaBulan[sekarang.getMonth()];
+      document.getElementById("tanggal").textContent =
+        hari + ", " + sekarang.getDate() + " " + bulan + " " + sekarang.getFullYear();
+
+      document.getElementById("ucapan").textContent = ucapanSesuaiJam(sekarang.getHours());
     }
 
     perbaruiJam();
